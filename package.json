@@ -1,0 +1,34 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "mix",
+        "watch": "mix watch",
+        "watch-poll": "mix watch -- --watch-options-poll=1000",
+        "hot": "mix watch --hot",
+        "prod": "npm run production",
+        "production": "mix --production"
+    },
+    "devDependencies": {
+        "@tailwindcss/postcss7-compat": "^2.0.2",
+        "autoprefixer": "^9.8.6",
+        "axios": "^0.21.1",
+        "laravel-mix": "^6.0.6",
+        "lodash": "^4.17.19",
+        "postcss": "^8.1.14",
+        "sass": "^1.32.4",
+        "sass-loader": "^10.1.1",
+        "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
+        "vue-loader": "^15.9.5",
+        "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "@fullcalendar/daygrid": "^5.5.0",
+        "@fullcalendar/interaction": "^5.5.0",
+        "@fullcalendar/list": "^5.5.0",
+        "@fullcalendar/vue": "^5.5.0",
+        "vue": "^2.6.12",
+        "vue-sweetalert2": "^4.1.1",
+        "vue2-datepicker": "^3.8.2"
+    }
+}
