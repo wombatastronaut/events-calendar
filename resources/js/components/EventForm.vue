@@ -11,7 +11,7 @@
 
 			<div class="form-group mb-5">
 				<label class="block mb-2">Dates</label>
-				<date-picker v-model="formData.dateRange" valueType="format" range />
+				<date-picker @open="errors = {}" v-model="formData.dateRange" valueType="format" range />
 				<span v-if="errors.dateRange" class="error-message block text-sm mt-2">{{ errors.dateRange }}</span>
 			</div>
 
@@ -59,7 +59,7 @@ export default {
 		formData: {
 			id: '',
 			title: '',
-			dateRange: '',
+			dateRange: [],
 			frequency: []
 		},
 		formTitle: 'Create Event',
@@ -132,7 +132,7 @@ export default {
 						}
 						break
 					case 'dateRange':
-						if (this.formData[key].length === 0) {
+						if (this.formData[key].length === 0 || !this.formData[key]) {
 							errors[key] = 'The dates field is required'
 						}
 						break
@@ -207,10 +207,13 @@ export default {
 		},
 
 		resetFields () {
-			for (let key in this.formData) {
-				const initialValue = key == 'frequency' ? [] : ''
+			this.formData = {}
+			const availableEventFields = ['id', 'title', 'dateRange', 'frequency']
+
+			availableEventFields.forEach((key) => {
+				const initialValue = key == 'dateRange' || key == 'frequency' ? [] : ''
 				this.formData[key] = initialValue
-			}
+			})
 
 			this.formTitle = 'Create Event'
 			this.errors = {}
