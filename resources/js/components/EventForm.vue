@@ -2,10 +2,10 @@
 	<div class="event-form-container">
 		<h2 class="text-2xl mb-5">{{ formTitle }}</h2>
 
-		<form @submit.prevent="submit" @keydown="errors = {}" class="event-form">
+		<form @submit.prevent="submit" class="event-form">
 			<div class="form-group mb-5">
 				<label class="block mb-2">Title</label>
-				<input v-model="formData.title" type="text">
+				<input @keydown="errors = {}" v-model="formData.title" type="text">
 				<span v-if="errors.title" class="error-message block text-sm mt-2">{{ errors.title }}</span>
 			</div>
 
@@ -132,20 +132,18 @@ export default {
 						}
 						break
 					case 'dateRange':
-						if (!this.formData[key]) {
+						if (this.formData[key].length === 0) {
 							errors[key] = 'The dates field is required'
 						}
 						break
 					case 'frequency':
-						if (this.formData[key],length === 0) {
+						if (this.formData[key].length === 0) {
 							errors[key] = 'The days of week field is required'
 						}
 				}
 			}
 
 			this.errors = errors
-			console.log(this.errors)
-
 			return Object.keys(this.errors).length === 0 && this.errors.constructor === Object
 		},
 
@@ -155,11 +153,13 @@ export default {
 				const { data } =  await axios.post('/api/events', payload)
 				
 				if (!data.success) {
-					alert('An error was encountered while processing your request')
+					this.showError()
 				}
 
 				this.success('You have successfully created an event!')
-			} catch {}
+			} catch {
+				this.showError()
+			}
 		},
 
 		async update (payload) {
@@ -167,11 +167,13 @@ export default {
 				const { data } =  await axios.patch(`/api/events/${payload.id}`, payload)
 				
 				if (!data.success) {
-					alert('An error was encountered while processing your request')
+					this.showError()
 				}
 
 				this.success('You have successfully updated the event!')
-			} catch {}
+			} catch {
+				this.showError()
+			}
 		},
 
 		success (message) {
@@ -210,7 +212,9 @@ export default {
 				this.formData[key] = initialValue
 			}
 
+			this.formTitle = 'Create Event'
 			this.errors = {}
+			this.$emit('reset')
 		}
 	}
 }

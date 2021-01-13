@@ -7,8 +7,11 @@
 		</header>
 		<main>
 			<div class="container mx-auto py-9">
-				<event-form :initial-form-data="selectedEvent" @success="refreshEvents" :key="eventFormKey" />
-				<full-calendar :options="calendarOptions" />
+				<event-form :initial-form-data="selectedEvent" @success="refreshEvents" @reset="selectedEvent = null" :key="eventFormKey" />
+				<div>
+					<p class="mb-5"><span class="font-bold">Instructions:</span> Click the event in the calendar in order to update or delete it.</p>
+					<full-calendar :options="calendarOptions" />
+				</div>
 			</div>
 		</main>
 	</div>
@@ -76,6 +79,7 @@ export default {
 		},
 
 		refreshEvents () {
+			this.selectedEvent = null
 			this.fetchEvents()
 			this.calendarOptions.eventClick = this.eventSelect
 		},
