@@ -14,7 +14,7 @@
     </head>
     <body>
         <div id="app">
-            This is a test
+        DASDAS
             <app></app>
         </div>
         <script src="{{ mix('js/app.js') }}"></script>
