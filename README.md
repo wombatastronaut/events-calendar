@@ -1,6 +1,6 @@
 # Events Calendar
 
-**URL:**
+**URL:** https://laravel-events-calendar.herokuapp.com
 
 ## Features
 - Create, update and delete Events.
@@ -16,4 +16,4 @@
 - Fullcalendar.io
 - vue2-datepicker
 
-**URL:** Click the event in the calendar in order to update or delete it.
+**Instructions:** Click the event in the calendar in order to update or delete it.
